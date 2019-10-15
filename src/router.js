@@ -15,6 +15,10 @@ const router = new Router({
       path: '/index',
       name: 'index',
       component: Index
+    },
+    {
+      path: '/login',
+      component: Login
     }
 
   ]
