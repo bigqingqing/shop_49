@@ -15,6 +15,7 @@
       <el-container>
         <el-aside width="200px"> <!-- 侧边栏-->
           <el-menu
+            router
             unique-opened
             background-color="#545c64"
             text-color="#fff"
@@ -24,7 +25,7 @@
                   <i class="el-icon-location"></i>
                   <span>用户管理</span>
                 </template>
-                <el-menu-item index="1-1">
+                <el-menu-item index="users">
                   <i class="el-icon-menu"></i>
                   <span slot="title">用户列表</span>
                 </el-menu-item>
@@ -34,11 +35,11 @@
                   <i class="el-icon-location"></i>
                   <span>权限管理</span>
                 </template>
-                <el-menu-item index="2-1">
+                <el-menu-item index="roles">
                   <i class="el-icon-menu"></i>
                   <span slot="title">角色管理</span>
                 </el-menu-item>
-                <el-menu-item index="2-2">
+                <el-menu-item index="rights">
                   <i class="el-icon-menu"></i>
                   <span slot="title">权限列表</span>
                 </el-menu-item>
@@ -46,7 +47,9 @@
           </el-menu>
         </el-aside>
 
-        <el-main>Main</el-main> <!--主页-->
+        <el-main>
+          <router-view></router-view>
+          </el-main> <!--主页-->
       </el-container>
     </el-container>
 </template>

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -68,35 +68,52 @@ export default {
       console.log(1)
       this.$refs.form.resetFields()
     },
-    login () {
-      this.$refs.form.validate((isValid, obj) => {
-        // isValid 是否通过校验 obj 未通过校验的信息
-        if (!isValid) return
-        // 通过校验了, 该发ajax了
-        axios({
+    async login () {
+      try {
+        await this.$refs.form.validate()
+        const { meta, data } = await this.$axios({
           method: 'post',
-          url: 'http://localhost:8888/api/private/v1/login',
+          url: 'login',
           data: this.form
-        }).then(res => {
-          console.log(res)
-          // eslint-disable-next-line no-unused-vars
-          const { meta, data } = res.data // 解构出data
-          localStorage.setItem('token', data.token) // 将data里的token拿出来存在localStorage
-          if (meta.status === 200) {
-            this.$message({
-              message: meta.msg,
-              type: 'success'
-            })
-            this.$router.push('/Index')
-          } else {
-            this.$message({
-              message: meta.msg,
-              type: 'error'
-            })
-          }
         })
-        // console.log('发ajax')
-      })
+        localStorage.setItem('token', data.token) // 将data里的token拿出来存在localStorage
+        if (meta.status === 200) {
+          this.$message({
+            message: meta.msg,
+            type: 'success'
+          })
+          this.$router.push('/Index')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    //   this.$refs.form.validate((isValid, obj) => {
+    //     // isValid 是否通过校验 obj 未通过校验的信息
+    //     if (!isValid) return
+    //     // 通过校验了, 该发ajax了
+    //     this.$axios({
+    //       method: 'post',
+    //       url: 'login',
+    //       data: this.form
+    //     }).then(res => {
+    //       // console.log(res)
+    //       // eslint-disable-next-line no-unused-vars
+    //       const { meta, data } = res // 解构出data
+    //       localStorage.setItem('token', data.token) // 将data里的token拿出来存在localStorage
+    //       if (meta.status === 200) {
+    //         this.$message({
+    //           message: meta.msg,
+    //           type: 'success'
+    //         })
+    //         this.$router.push('/Index')
+    //       } else {
+    //         this.$message({
+    //           message: meta.msg,
+    //           type: 'error'
+    //         })
+    //       }
+    //     })
+    //   })
     }
   }
 }
