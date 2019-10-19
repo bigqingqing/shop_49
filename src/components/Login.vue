@@ -10,10 +10,10 @@
       status-icon
     >
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
+        <el-input v-model="form.username" @keyup.enter.native="login" placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="form.password" type="password" placeholder="请输入密码"></el-input>
+        <el-input v-model="form.password" @keyup.enter.native="login" type="password" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button class="btn-r" @click="login" type="primary">登录</el-button>

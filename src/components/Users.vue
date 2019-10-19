@@ -314,7 +314,7 @@ export default {
 }
 </script>
 .
-<style lang="scss" scoped>
+<style lang="scss" >
 .users {
   .el-breadcrumb {
     height: 40px;
