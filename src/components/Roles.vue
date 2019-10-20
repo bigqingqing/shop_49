@@ -12,6 +12,7 @@
     <el-table :data="rolesList">
       <el-table-column type="expand">
         <template v-slot:default="{row}">
+          <p v-if="row.children.length===0">暂无权限</p>
           <el-row class="l1-style"  v-for="l1 in row.children" :key="l1.id">
             <el-col :span="4">
               <!-- 一级权限 l1 -->
